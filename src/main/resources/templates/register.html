@@ -38,7 +38,7 @@
                     <div class="breadcrumb_iner text-center">
                         <div class="breadcrumb_iner_item">
 							<h2>Elements</h2>
-                            <p>Home <span>//</span>로그인</p>
+                            <p>Home <span>//</span>회원가입</p>
                         </div>
                     </div>
                 </div>
@@ -52,13 +52,19 @@
 			<div class="section-top-border">
 				<div class="row">
 					<div class="col-lg-8 col-md-8">
-						<h3 class="mb-30">로그인</h3>
-						<form action="/login" method="post" id="login_form">
+						<h3 class="mb-30">회원가입</h3>
+						<form action="/users" method="post" id="register_form">
 							<div class="mt-10">
-								<input type="text" name="userId" placeholder="사용자 아이디" onfocus="this.placeholder = ''" onblur="this.placeholder = 'First Name'" required="" class="single-input">
+								<input type="text" name="userId" placeholder="사용자 아이디" onfocus="this.placeholder = ''" onblur="this.placeholder = '사용자 아이디'" required="" class="single-input">
 							</div>
 							<div class="mt-10">
-								<input type="password" name="userPw" placeholder="사용자 암호" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Last Name'" required="" class="single-input">
+								<input type="password" name="userPw" placeholder="사용자 암호" onfocus="this.placeholder = ''" onblur="this.placeholder = '사용자 암호'" required="" class="single-input">
+							</div>
+							<div class="mt-10">
+								<input type="text" name="name" placeholder="사용자 이름" onfocus="this.placeholder = ''" onblur="this.placeholder = '사용자 이름'" required="" class="single-input">
+							</div>
+							<div class="mt-10">
+								<input type="text" name="company" placeholder="사용자 회사" onfocus="this.placeholder = ''" onblur="this.placeholder = '사용자 회사'" required="" class="single-input">
 							</div>
 							<div class="button-group mt-3">
 									<button type="submit" class="button button-contactForm btn_4">
