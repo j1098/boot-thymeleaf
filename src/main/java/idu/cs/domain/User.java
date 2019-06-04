@@ -22,13 +22,11 @@ public class User {
 	
 	
 	
-	public User(String userId, String userPw, String name, String company) {
-		super();
-		this.userId = userId;
-		this.userPw = userPw;
-		this.name = name;
-		this.company = company;
-	}
+	/*
+	 * public User(String userId, String userPw, String name, String company) {
+	 * super(); this.userId = userId; this.userPw = userPw; this.name = name;
+	 * this.company = company; }
+	 */
 	
 	public Long getId() {
 		return id;
