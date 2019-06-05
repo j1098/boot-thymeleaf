@@ -74,7 +74,19 @@ public class UserController {
 	public String createUser(@Valid User user, Model model) {
 		userService.saveUser(user);
 		return "redirect:/users"; // get 방식으로 해당 url로 재지정함
-	}/*
+	}
+	@GetMapping("/user-update-form")
+	public String getUpdateForm(Model model, HttpSession session) {
+		// 서비스를 통해 리파지토리로부터 정보를 가져와야 하나 세션에 저장해 두었으므로 정보를 활용
+		User user = (User) session.getAttribute("user");
+		/*
+		User sessionUser = userService.getUserById(user.getId());
+		model.addAttribute("user", sessionUser);
+		*/
+		model.addAttribute("user", user);
+		return "info";
+	}
+	/*
 	@GetMapping("/users/{id}")
 	public String getUserById(@PathVariable(value = "id") Long userId, Model model)
 			throws ResourceNotFoundException {
@@ -90,15 +102,18 @@ public class UserController {
 		model.addAttribute("users", users);
 		return "userlist";
 		//return ResponseEntity.ok().body(user);
-	}
+	}*/
 	@PutMapping("/users/{id}") // @PatchMapping
-	public String updateUser(@PathVariable(value = "id") Long userId, @Valid UserEntity userDetails, Model model) {
-		UserEntity user = userRepo.findById(userId).get(); // user는 DB로부터 읽어온 객체
-		user.setName(userDetails.getName()); // userDetails는 전송한 객체
-		user.setCompany(userDetails.getCompany());
-		userRepo.save(user);
+	public String updateUser(@PathVariable(value = "id") Long id, @Valid User user, Model model, HttpSession session) {
+		/*
+		 * updateUser 객체는 입력 폼 내용 : id 값이 없음, 
+		 */
+		user.setId(userService.getUserById(id).getId());
+		userService.updateUser(user);
+		session.setAttribute("user", user);
 		return "redirect:/users";
 	}
+	/*
 	@DeleteMapping("/users/{id}")
 	public String deleteUser(@PathVariable(value = "id") Long userId, Model model) {
 		UserEntity user = userRepo.findById(userId).get();

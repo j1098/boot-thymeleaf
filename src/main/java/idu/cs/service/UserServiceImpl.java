@@ -9,17 +9,25 @@ import org.springframework.stereotype.Service;
 import idu.cs.domain.User;
 import idu.cs.entity.UserEntity;
 import idu.cs.repository.UserRepository;
+import idu.sc.exception.ResourceNotFoundException;
 
 @Service("userservice")
 public class UserServiceImpl implements UserService {
 	@Autowired UserRepository repository;
 	
 	@Override
-	public User getUserId(long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public User getUserById(long id) {
+		UserEntity entity = null;
+		try {
+		entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("not found: " + id));
+	
+		}catch (ResourceNotFoundException e) {
+			e.printStackTrace();
+		}
+		User user = entity.buildDomain();
+		
+		return user;
 	}
-
 	@Override
 	public User getUserByUserId(String userId) {
 		// DB, repository에서 가져와 Entity에 저장
@@ -75,8 +83,9 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void updateUser(User user) {
-		// TODO Auto-generated method stub
-
+		UserEntity entity = new UserEntity();
+		entity.buildEntity(user);
+		repository.save(entity);
 	}
 
 	@Override
